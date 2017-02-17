@@ -1,0 +1,194 @@
+<html><head>
+    <title>Photo Addendum</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+<div id="page-container" class="box-shadow" onclick="clickListener()">
+    <h1>Photo Addendum     </h1><img float="right" id="logo" src="images/logo.png"></img>
+    <label id="property-label" placeholder="Property Address" contenteditable="true" placeholder="Type Property Address...">Type Property Address</label>
+    <p id="instruction"><sup>Click a box, launch a file dialog, select a photo, add description</sup></p>
+    <!-- <p id="property"></p> -->
+    <!-- <sup id="date" value="new Date();"></sup> -->
+    <div id="au">
+      <span class="row">
+        <div class="container1">
+          <!-- <a class="box1" id="box1" onclick="selectBox(this)"> -->
+          <a class="box1" id="box1">
+            <img class="img" src="images/temp2.png" align="center" width="270px" height="270px" object-fit="contain"></img>
+          </a>
+          <input class="fd1" id="singlefd1" type="file" accept=".png,.jpg,.JPG,.PNG"/>
+          <p class="fileID" color="#CCCCCC"></p>
+          <input type="textarea" float="left"></input>
+        </div>
+
+        <span class="space">.</span>
+        <div class="container2">
+          <a class="box2"  id="box2"><!--onclick="fileDialog.click()"-->
+            <img class="img" src="images/temp2.png" align="center"></img>
+          </a>
+          <input class="fd1" id="singlefd2" type="file" accept=".png,.jpg,.JPG,.PNG"/>
+          <p class="fileID" color="#CCCCCC"></p>
+          <input type="textarea" float="right"></input>
+        </div>
+      </span>
+      <div class="break" >
+        <br>
+        <p margin-left="30px" float="right"><br></p>
+        <br>
+      </div>
+  </div>
+</div>
+
+<div id="mid-body">
+  <div class="clear-float"></div>
+  <a id="add-row"><img id="downarrow" src="images/expandarrow.png"/></img></a>
+  <a id="delete-row"><img  id="uparrow" src="images/uparrow.png"/></img></a>
+  <a id="add-images" onclick="$('#fd').click()"><img id="add-icon" src="images/multi-select.png"/></img></a>
+  <input id="fd" type="file" accept=".png,.jpg,.JPG,.PNG" multiple/>
+
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/libs/jquery-3.1.1.min.js"></script>
+<script src="js/index.js"></script>
+<script src="/js/delivery.js"></script>
+
+</body>
+<footer>
+  <!-- <button id="pdf" display="none">Generate PDF</button> -->
+  <input type=button id="print" value="Print to PDF" onClick="printPage(this)"/>
+  <a name=info><img id="info-icon" src="images/info.png"/></a>
+  <span id="bubble" class="hide"><span>Will launch the browser's Print Page. Select
+    "Save as PDF" for the Print Destination</span></span>
+
+  <button id="jpeg">JPEG</button>
+  <button id="png" >PNG</button>
+  <input id="singlefd" type="file" accept=".png,.jpg,.JPG,.PNG"/>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+  <script src="/js/libs/dom-to-image.js"></script>
+  <script src="/js/libs/filesaver.js"></script>
+  <script>
+  var printPage = function(ev){
+    console.log('Print page was clicked', ev);
+    var property = $('#property-label')[0].textContent;
+    console.log(property);
+    if(property == 'Type Property Address'){
+      var p = prompt('Enter Property Address: ', 'type address here');
+      console.log('PROMPT RESPONSE: ', p);
+      if(!p){
+        return p;
+      }
+      $('#property-label')[0].textContent = p;
+      $("#page-container").removeClass("box-shadow");
+      window.print();
+      $("#page-container").addClass("box-shadow");
+      $('#add-row').click();
+      $('#delete-row').click();
+    }else{
+      $("#page-container").removeClass("box-shadow");
+      window.print();
+      $("#page-container").addClass("box-shadow");
+      $('#add-row').click();
+      $('#delete-row').click();
+    }
+  }
+  </script>
+    <script>
+    var node = document.body;
+    var htmlimage;
+    l = { orientation: 'p', unit: 'pt', format: 'a3', compress: true, fontSize: 8, lineHeight: 0, autoSize: false, printHeaders: true, pagesplit: true };
+    var doc = new jsPDF(l);
+
+    // $('#pdf').click(function(){
+    //   doc.addHTML($('#page-container'),0,0,{pagesplit:true},function() {
+    //      doc.save('CDC.pdf');
+    //    });
+    // });
+
+    // doc.addHTML($('elementHTML'),{format:'png',pagesplit: true}});
+    var pdf = new jsPDF('p','pt','a4');
+
+    $('#png').click(function() {
+      console.log('PNG...');
+      domtoimage.toBlob(document.body)
+      .then(function (blob) {
+        window.saveAs(blob, 'my-node.png');
+      })
+      .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+      });
+    });
+
+    $('#jpeg').click(function() {
+      console.log('JPEG...');
+      domtoimage.toJpeg(document.body, { quality: .95 })
+      .then(function (dataUrl) {
+          var link = document.createElement('a');
+          link.download = 'photo_addendum.jpeg';
+          link.href = dataUrl;
+          link.click();
+      }).catch(function (error) {
+          console.error('oops, something went wrong!', error);
+      });
+    });
+    </script>
+    <script>
+    var arrayWithElements = new Array();
+
+    var clickListener = function(e) {
+        var clickedElement;
+        if(e == null) {
+            clickedElement = event.srcElement;
+        } else {
+            clickedElement = e.target;
+        }
+        // arrayWithElements.push($(clickedElement).cssSelectorAsString()); // <====
+        console.log(clickedElement);
+        // console.log(clickedElement.hasClass('box'));
+        var dialog = clickedElement.parentNode.parentNode;
+        dialog = dialog.getElementsByClassName("fd1")[0];
+        console.log('FILE DIALOG TO USE: ', dialog.id);
+        console.log(clickedElement.getElementsByClassName("box"));
+        console.log('ELEMENT: ', clickedElement.parentNode);
+        var ele = clickedElement.parentNode;
+        var isBox = ele.className;
+        console.log('BOX: ', isBox);
+
+        if(isBox === "box1" || isBox === "box2"){
+          var chooser = $('#singlefd');
+          chooser.unbind('change');
+          chooser.change(function(evt) {
+            console.log($(this).val());
+            var file = evt.currentTarget.files[0];
+            console.log('FILE: ', file);
+            var i = URL.createObjectURL(file);
+            $('#'+ ele.id).html('<img class="img" src="' + i + '"/>');
+          });
+            chooser.trigger('click');
+          }
+        //   console.log('Launch File Dialog');
+        //   $('#singlefd1').click();
+        //   $('#fileDialog').on('change', function(evt){
+        //     var file = evt.currentTarget.files;
+        //     var length = event.currentTarget.files.length;
+        //     console.log('FILE: ', files);
+        //     i = files[0];
+        //     i = URL.createObjectURL(i);
+        //     $('#'+ ele.id).html('<img src="' + i + '"/>');
+        //   });
+        // }
+        }
+    </script>
+
+</footer>
+
+</html>

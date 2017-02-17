@@ -1,0 +1,23 @@
+Print Dialog --> Save to PDF option
+        - info icon next to print button with printing directions
+        - prompt to confirm address if printing without Address
+        - retract print-ugly css attrs, window.print(), then re-add css
+ANCHORED FOOTER
+        - print button and footer should be ANCHORED to the bottom of the page-container
+        - will contain printtoPDF button (w/ instruction icon)
+                          * instruction icon hover produces a text bubble with short directions
+        - contain "Back to Top" link
+        - contain a picture count, row count
+ADD KEY TRIGGERS
+        - key triggers for add-row button, delete-row button, back-to-top, back-to-bottom, add-multiple button
+
+DATESTAMP
+        - datestamp should be added either on page-load or on printbutton click
+
+FILE NAME
+        - File Name should appear as a small caption bottom right-hand corner within the Image Box
+
+PNG/JPEG functionality
+        - ENABLE the .PNG and .JPeg Convert Buttons, but limit the number of pictures.
+        - if the user inputs over 40 pictures, grey out and disable the JPG, PNG buttons
+        - floating text over either button on hover: explains 40 picture maximum
