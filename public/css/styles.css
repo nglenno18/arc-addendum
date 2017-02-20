@@ -14,6 +14,7 @@ footer{
 .b{
   height: 110%;
 }
+
 #tempimg{
   display: inline-block;
   width: 500px;
@@ -166,6 +167,9 @@ footer{
 }
 #info-icon:hover{
   cursor:pointer;
+}
+.textA{
+  
 }
 
 footer input{

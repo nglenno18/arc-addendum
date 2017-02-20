@@ -33,7 +33,7 @@
           </a>
           <input class="fd1" id="singlefd2" type="file" accept=".png,.jpg,.JPG,.PNG"/>
           <p class="fileID" color="#CCCCCC"></p>
-          <input type="textarea" float="right"></input>
+          <input class="textA" type="textarea" float="right"></input>
         </div>
       </span>
       <div class="break" >
@@ -67,8 +67,8 @@
   <span id="bubble" class="hide"><span>Will launch the browser's Print Page. Select
     "Save as PDF" for the Print Destination</span></span>
 
-  <button id="jpeg">JPEG</button>
-  <button id="png" >PNG</button>
+  <!-- <button id="jpeg">JPEG</button>
+  <button id="png" >PNG</button> -->
   <input id="singlefd" type="file" accept=".png,.jpg,.JPG,.PNG"/>
 
 
@@ -81,25 +81,51 @@
     console.log('Print page was clicked', ev);
     var property = $('#property-label')[0].textContent;
     console.log(property);
+    var lastBox = "";
+    var lastContainer = "";
     if(property == 'Type Property Address'){
       var p = prompt('Enter Property Address: ', 'type address here');
       console.log('PROMPT RESPONSE: ', p);
       if(!p){
         return p;
+      }else{
+        $('#property-label')[0].textContent = p;
+        $('#property-label').css("color", "#6bcee5");
       }
-      $('#property-label')[0].textContent = p;
-      $("#page-container").removeClass("box-shadow");
-      window.print();
-      $("#page-container").addClass("box-shadow");
-      $('#add-row').click();
-      $('#delete-row').click();
-    }else{
-      $("#page-container").removeClass("box-shadow");
-      window.print();
-      $("#page-container").addClass("box-shadow");
-      $('#add-row').click();
-      $('#delete-row').click();
     }
+
+    $("#page-container").removeClass("box-shadow");
+    $('#mid-body').addClass("hide");
+    var instruction = document.getElementById("instruction");
+    instruction = instruction.getElementsByTagName("sup");
+    console.log('Instructions: ', instruction);
+    var insContent = instruction[0].textContent;
+    console.log('Instructional content: ', insContent);
+    instruction[0].textContent = '';
+    lastBox = document.getElementsByClassName("box2");
+    var isEmpty = lastBox[lastBox.length-1].getElementsByTagName("img")[0].src;
+    if(isEmpty.substring(isEmpty.lastIndexOf("/")+1) === "temp2.png"){
+      console.log('\n\nHIDE LAST BOX');
+      lastBox = lastBox[lastBox.length-1].id;
+      console.log(document.getElementById(lastBox).parentElement);
+      lastContainer = document.getElementById(lastBox).parentElement;
+      lastContainer.id = "txtID";
+      $('#'+ lastContainer.id).addClass("hide");
+    }
+    console.log(lastBox);
+    console.log('IS EMPTY: ', isEmpty);
+    $('#bubble').addClass("hide");
+    $('footer').addClass("hide");
+    window.print();
+    $("#page-container").addClass("box-shadow");
+    $('#mid-body').removeClass("hide");
+    $('#'+lastContainer.id).removeClass("hide");
+    $('#'+lastContainer.id).removeAttr("id");
+    instruction[0].textContent = insContent;
+    $('footer').removeClass("hide");
+
+    $('#add-row').click();
+    $('#delete-row').click();
   }
   </script>
     <script>
