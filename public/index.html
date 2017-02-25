@@ -9,8 +9,9 @@
 
 <body>
 <div id="page-container" class="box-shadow" onclick="clickListener()">
-    <h1>Photo Addendum     </h1><img float="right" id="logo" src="images/logo.png"></img>
-    <label id="property-label" placeholder="Property Address" contenteditable="true" placeholder="Type Property Address...">Type Property Address</label>
+    <h1>Photo Addendum     </h1><img title="Visit us at arcvendormgmt.com"float="right" id="logo" src="images/logo.png"></img>
+    <label id="property-label" placeholder="Property Address" contenteditable="true" placeholder="Type Property Address..."
+    title="Type Name of Property">Type Property Address</label>
     <p id="instruction"><sup>Click a box, launch a file dialog, select a photo, add description</sup></p>
     <!-- <p id="property"></p> -->
     <!-- <sup id="date" value="new Date();"></sup> -->
@@ -18,22 +19,22 @@
       <span class="row">
         <div class="container1">
           <!-- <a class="box1" id="box1" onclick="selectBox(this)"> -->
-          <a class="box1" id="box1">
+          <a class="box1" id="box1" title="Upload a photo">
             <img class="img" src="images/temp2.png" align="center" width="270px" height="270px" object-fit="contain"></img>
           </a>
           <input class="fd1" id="singlefd1" type="file" accept=".png,.jpg,.JPG,.PNG"/>
           <p class="fileID" color="#CCCCCC"></p>
-          <input type="textarea" float="left"></input>
+          <input type="textarea" float="left" title="Add a photo description"></input>
         </div>
 
         <span class="space">.</span>
         <div class="container2">
-          <a class="box2"  id="box2"><!--onclick="fileDialog.click()"-->
+          <a class="box2"  id="box2" title="Upload a photo"><!--onclick="fileDialog.click()"-->
             <img class="img" src="images/temp2.png" align="center"></img>
           </a>
           <input class="fd1" id="singlefd2" type="file" accept=".png,.jpg,.JPG,.PNG"/>
           <p class="fileID" color="#CCCCCC"></p>
-          <input class="textA" type="textarea" float="right"></input>
+          <input class="textA" type="textarea" float="right" title="Add a photo description"></input>
         </div>
       </span>
       <div class="break" >
@@ -46,9 +47,9 @@
 
 <div id="mid-body">
   <div class="clear-float"></div>
-  <a id="add-row"><img id="downarrow" src="images/expandarrow.png"/></img></a>
-  <a id="delete-row"><img  id="uparrow" src="images/uparrow.png"/></img></a>
-  <a id="add-images" onclick="$('#fd').click()"><img id="add-icon" src="images/multi-select.png"/></img></a>
+  <a id="add-row" title="Add an empty row"><img id="downarrow" src="images/expandarrow.png"/></img></a>
+  <a id="delete-row" title="Remove the bottom row"><img  id="uparrow" src="images/uparrow.png"/></img></a>
+  <a id="add-images" title="Upload multiple images" onclick="$('#fd').click()"><img id="add-icon" src="images/multi-select.png"/></img></a>
   <input id="fd" type="file" accept=".png,.jpg,.JPG,.PNG" multiple/>
 
 </div>
@@ -62,10 +63,12 @@
 </body>
 <footer>
   <!-- <button id="pdf" display="none">Generate PDF</button> -->
-  <input type=button id="print" value="Print to PDF" onClick="printPage(this)"/>
+  <input type=button id="print" value="Print to PDF" onClick="printPage(this)" title="Print Page --> Save As PDF"/>
   <a name=info><img id="info-icon" src="images/info.png"/></a>
   <span id="bubble" class="hide"><span>Will launch the browser's Print Page. Select
     "Save as PDF" for the Print Destination</span></span>
+
+  <!-- <button class="tooltip" id="tooltipButton" title="this is the tooltip!">JPEG</button> -->
 
   <!-- <button id="jpeg">JPEG</button>
   <button id="png" >PNG</button> -->
