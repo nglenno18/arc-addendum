@@ -43,16 +43,16 @@
         <br>
       </div>
   </div>
-  <a href="#top" id="backtotop">Back to Top</a>
-
+  <a href="#top" class="bottom" id="backtotop">Back to Top</a>
+  <label class="bottom" id="photocount">0 <span>images</span></label>
 </div>
 
 
 <div id="mid-body">
   <div class="clear-float"></div>
-  <a id="add-row" title="Add an empty row"><img id="downarrow" src="images/expandarrow.png"/></img></a>
-  <a id="delete-row" title="Remove the bottom row"><img  id="uparrow" src="images/uparrow.png"/></img></a>
-  <a id="add-images" title="Upload multiple images" onclick="$('#fd').click()"><img id="add-icon" src="images/multi-select.png"/></img></a>
+  <a id="add-row" title="(CTRL+down) Add an empty row" data-scrollTo="print"><img id="downarrow" src="images/expandarrow.png"/></img></a>
+  <a id="delete-row" title="(CTRL+up) Remove the bottom row"><img  id="uparrow" src="images/uparrow.png"/></img></a>
+  <a id="add-images" title="(CTRL+M) Upload multiple images" onclick="$('#fd').click()"><img id="add-icon" src="images/multi-select.png"/></img></a>
   <input id="fd" type="file" accept=".png,.jpg,.JPG,.PNG" multiple/>
 
 </div>
@@ -62,11 +62,46 @@
 <script src="js/libs/jquery-3.1.1.min.js"></script>
 <script src="js/index.js"></script>
 <script src="/js/delivery.js"></script>
+<script>
+  $(document).keydown(function(evt){
+    if(evt.ctrlKey){
+      var code = evt.keyCode;
+      switch (code) {
+        case 77:                          //m
+          evt.preventDefault();
+          $('#add-images').click();
+          break;
+        case 40:                          //downarrow
+          evt.preventDefault();
+          $('#add-row').click();
+          console.log(`WINDOW HEIGHT: `, document.height);
+          window.scrollTo(0, 90000000000);
+          // $.scrollTo($('#add-row').data("scrollTo"));
+          break;
+        case 38:                          //uparrow
+          evt.preventDefault();
+          if(document.getElementById('au3')){
+            $('#delete-row').click();
+          }
+          break;
+        case 83:                          //S
+          evt.preventDefault();
+            $('#print').click();
+          break;
+        case 73:                          //i
+          evt.preventDefault();
+          alert('To print to pdf, right-click the page, select print, and change the print destination to "Save as PDF"');
+          break;
+        default:
 
+      }
+    }
+  });
+</script>
 </body>
 <footer>
   <!-- <button id="pdf" display="none">Generate PDF</button> -->
-  <input type=button id="print" value="Print to PDF" onClick="printPage(this)" title="Print Page --> Save As PDF"/>
+  <input type=button id="print" value="Print to PDF" onClick="printPage(this)" title="(Ctrl+S) Print Page --> Save As PDF"/>
   <a name=info><img id="info-icon" src="images/info.png"/></a>
   <span id="bubble" class="hide"><span>Will launch the browser's Print Page. Select
     "Save as PDF" for the Print Destination</span></span>
@@ -207,17 +242,6 @@
           });
             chooser.trigger('click');
           }
-        //   console.log('Launch File Dialog');
-        //   $('#singlefd1').click();
-        //   $('#fileDialog').on('change', function(evt){
-        //     var file = evt.currentTarget.files;
-        //     var length = event.currentTarget.files.length;
-        //     console.log('FILE: ', files);
-        //     i = files[0];
-        //     i = URL.createObjectURL(i);
-        //     $('#'+ ele.id).html('<img src="' + i + '"/>');
-        //   });
-        // }
         }
     </script>
 

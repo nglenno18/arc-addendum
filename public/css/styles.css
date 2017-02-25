@@ -65,10 +65,21 @@ footer{
 #backtotop:visited{
   text-decoration: none;
 }
-#backtotop:hover{
+.bottom:hover{
   text-decoration: none;
-  color: #6bcee5;
+  color: #6bcee5 !important;
   font-weight: bold;
+}
+#photocount{
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  z-index: 0;
+  text-decoration: none;
+  color: grey;
+}
+#photocount span{
+  font-size: 70% !important;
 }
 .box-shadow{
   box-shadow: 10px 10px 10px darkgrey;
