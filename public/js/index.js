@@ -3,8 +3,14 @@ var prevBoxid;
 var w = 1;
 var t=1;
 
+
+
 socket.on('connect', function(){
   console.log(socket.id);
+
+  // $('#linklabel').on('click', function(evt){
+  //
+  // });
 
   var delivery = new Delivery(socket);
 
