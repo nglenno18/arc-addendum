@@ -14,7 +14,29 @@ footer{
 .b{
   height: 110%;
 }
-
+#pdfupload{
+  display: inline-block;
+  float:right;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+#linklabel{
+  font-size: 80%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  float:right;
+  color: #6bcee5;
+  text-decoration: underline;
+  font-weight:bold;
+  position: relative;
+  top: -25px;
+  left: 100px;
+}
+#linklabel:hover{
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
 #tempimg{
   display: inline-block;
   width: 500px;
@@ -299,7 +321,7 @@ footer button{
   /*margin-right:20px;*/
 }
 #selectedBox{
-  border: 8px solid #378;
+  border: 8px solid #6bcee5;
 }
 .box1:hover{
   cursor:pointer;

@@ -9,6 +9,37 @@ socket.on('connect', function(){
   var delivery = new Delivery(socket);
 
   delivery.on('delivery.connect', function(delivery){
+    $('#pdfupload').on('click', function(evt){
+      $('#pdfupload').unbind('change');
+
+      $('#pdfupload').on('change', function(evt){
+        var files = evt.currentTarget.files[0];
+        console.log(files);
+        var filename = files.name.substring(0, files.name.lastIndexOf('.'));
+        console.log(filename);
+        var newname = filename.replace(" ", "%20");
+        var extraParams = {
+          "property": newname
+        }
+        delivery.send(files, extraParams);
+        delivery.on('send.success', function(fileUID){
+          // console.log('FILEUID: ', fileUID);
+          // console.log('File was successfully sent!');
+          console.log(window.location);
+          // var newlink = window.location + extraParams.property;
+
+          var newlink = window.location + extraParams.property;
+          console.log(newlink);
+          $('#linklabel').removeClass("hide");
+          $('#linklabel').text(newlink);
+
+          console.log(document.getElementById('linklabel'));
+          // $('#box2-image').attr("src", fileUID.name);
+        });
+      });
+    });
+
+
     $('#fd').on('click', function(){
       var selectedBox = document.getElementById('selectedBox');
       // if(!selectedBox) return alert('No box selected');

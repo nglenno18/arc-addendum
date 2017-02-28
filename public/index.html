@@ -1,5 +1,5 @@
 <html><head>
-    <title>Photo Addendum</title>
+    <title>ARC Addendum</title>
 
     <meta charset="utf-8">
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -111,7 +111,8 @@
   <!-- <button id="jpeg">JPEG</button>
   <button id="png" >PNG</button> -->
   <input id="singlefd" type="file" accept=".png,.jpg,.JPG,.PNG"/>
-
+  <input id="pdfupload" type="file" accept=".png,.jpg,.JPG,.PNG,.PDF,.pdf" title="upload your pdf to generate a downloadable link"/>
+  <label title="Copy PDF download link" id="linklabel" class="hide" onclick="document.execCommand('copy');">labesdfasdfasdfasdfl</label>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
@@ -157,7 +158,9 @@
     console.log('IS EMPTY: ', isEmpty);
     $('#bubble').addClass("hide");
     $('footer').addClass("hide");
+    document.title = property;
     window.print();
+    // window.title = 'ARC Addendum';
     $("#page-container").addClass("box-shadow");
     $('#mid-body').removeClass("hide");
     $('#'+lastContainer.id).removeClass("hide");
