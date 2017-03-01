@@ -112,15 +112,17 @@
   <button id="png" >PNG</button> -->
   <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.0/clipboard.min.js"></script>
   <input id="singlefd" type="file" accept=".png,.jpg,.JPG,.PNG"/>
-  <button id="btngen" onclick="$('#pdfupload').click()">Generate Downloadable Link</button>
+  <button id="btngen" onclick="$('#pdfupload').click()" title="upload your pdf to generate a downloadable link"><img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/></button>
   <input id="pdfupload" type="file" accept=".png,.jpg,.JPG,.PNG,.PDF,.pdf" title="upload your pdf to generate a downloadable link"/>
-  <textarea id="tarea" class="hide">this is from an invisible text area</textarea>
-  <label type="text" title="Copy PDF download link" id="linklabel" data-clipboard-action="copy" data-clipboard-target="#tarea" class="hide" onclick="clipboard()"></label>
+  <button id="btncopy" title="Copy Link!" class="hide" data-clipboard-action="copy" data-clipboard-target="#tarea" onclick="clipboard()"><img src="images/copy_link.png"/></button><textarea id="tarea" class="hide">this is from an invisible text area</textarea>
+  <label type="text" title="Copy PDF download link" id="linklabel" data-clipboard-action="copy" data-clipboard-target="#tarea" class="hide"></label>
   <script>
     function clipboard(){
       $('#tarea').removeClass("hide");
+      // $('#tarea').css("background", "white");
+
       document.getElementById("tarea").value = $('#linklabel').text();
-      var clipboard = new Clipboard('#linklabel');
+      var clipboard = new Clipboard('#btncopy');
       clipboard.on('success', function(e) {
           console.info('Action:', e.action);
           console.info('Text:', e.text);
@@ -128,14 +130,21 @@
 
           e.clearSelection();
           $('#linklabel').addClass("clicked");
+          $('#linklabel').addClass("hide");
           $('#linklabel').prop('title', 'Copied!');
-          $('#tarea').addClass("hide");
 
+          $('#tarea').prop('title', 'Copied!');
+          $('#tarea').removeClass("hide");
+          $('#tarea').css("background", "#333");
+          $('#tarea').fadeTo('fast', 0.0).fadeTo('slow', 1.0);
       });
       clipboard.on('error', function(e) {
           console.error('Action:', e.action);
           console.error('Trigger:', e.trigger);
       });
+      var i = 0;
+      // $('#tarea').css("background", "white");
+      // $('#tarea').fadeTo('fast', 0.0);
     }
   </script>
 

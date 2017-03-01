@@ -36,10 +36,14 @@ socket.on('connect', function(){
 
           var newlink = window.location + extraParams.property;
           console.log(newlink);
-          $('#linklabel').removeClass("hide");
+          // $('#linklabel').removeClass("hide");
+          $('#tarea').removeClass("hide");
+          $('#btncopy').removeClass("hide");
+          $('#tarea').text(newlink);
+          console.log(newlink);
           $('#linklabel').text(newlink);
 
-          console.log(document.getElementById('linklabel'));
+          return console.log(document.getElementById('tarea'));
           // $('#box2-image').attr("src", fileUID.name);
         });
       });
@@ -159,6 +163,20 @@ socket.on('connect', function(){
       $('#png').removeAttr("disabled").css("cursor", "auto");
       $('#jpeg').removeAttr("disabled").css("cursor", "auto");
     }
+  });
+
+  var tempbtn = "";
+  $('#btngen').hover(function(on){
+    var btn = document.getElementById('btngen');
+    console.log($('#btngen'));
+    tempbtn = btn.innerHTML;
+    // console.log(tempbtn);
+    $('#btngen').html('<span>Generate a Download Link</span> <img float="right" src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>' );
+    $('#btngen').addClass("text_align");
+    console.log($('#btngen'));
+  },function(off){
+      $('#btngen')
+      .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
   });
 
   $('#add-images').hover(function(i){

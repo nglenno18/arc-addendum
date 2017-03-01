@@ -18,11 +18,73 @@ footer{
   color: #CCCCCC !important;
   text-decoration: line-through !important;
 }
+#btngen img{
+  width: 20px;
+}
+
+#tarea{
+  align-self: center;
+  float: right;
+  height: 24px;
+  background: #333;
+  /*opacity: 0.1;*/
+  color: #ccc;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  text-overflow: none;
+  padding:0px;
+  padding-top: 2px;
+  white-space: nowrap;
+  width: inherit;
+  max-width: 22em;
+  resize: none;
+  box-shadow: 2px 2px 4px darkgrey;
+  /*box-shadow: 5px solid darkgrey;*/
+  margin-right:0px;
+}
+.highlight{
+  background-color: white;
+}
+#tarea:hover{
+  text-overflow: inherit;
+
+}
+#notif{
+
+}
+#btncopy{
+  padding:0px;
+  margin: 0px;
+  border-radius: 10%;
+  margin-right: 30px;
+  transition: 500ms all ease;
+  float: right;
+}
+#btncopy img{
+  padding: 0px;
+  margin: 0px;
+  align-self: center;
+  height: 20px;
+}
+
 #btngen{
   display: inline-block;
   float:right;
   margin-top: 0px;
   padding-top: 0px;
+  height: 25px;
+}
+#btngen span{
+  position: relative;
+  top: -9px;
+  margin-right: 3px;
+}
+.align_text{
+  padding: 0px;
+  padding-top: 0px;
+  padding-bottom: 13px!important;
+  text-align: center;
+  margin-bottom: 10px;
 }
 #pdfupload{
   display: none;
