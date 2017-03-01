@@ -101,7 +101,7 @@
 </body>
 <footer>
   <!-- <button id="pdf" display="none">Generate PDF</button> -->
-  <input type=button id="print" value="Print to PDF" onClick="printPage(this)" title="(Ctrl+S) Print Page --> Save As PDF"/>
+  <button id="print" onClick="printPage(this)" title="(Ctrl+S) Print Page --> Save As PDF"><img id="topdf_icon" src="images/topdf_grey.png"/><span>Print to PDF</span></button>
   <a name=info><img id="info-icon" src="images/info.png"/></a>
   <span id="bubble" class="hide"><span>Will launch the browser's Print Page. Select
     "Save as PDF" for the Print Destination</span></span>
@@ -119,8 +119,8 @@
   <script>
     function clipboard(){
       $('#tarea').removeClass("hide");
-      // $('#tarea').css("background", "white");
 
+      $('#tarea').addClass("highlighted");
       document.getElementById("tarea").value = $('#linklabel').text();
       var clipboard = new Clipboard('#btncopy');
       clipboard.on('success', function(e) {
@@ -143,8 +143,9 @@
           console.error('Trigger:', e.trigger);
       });
       var i = 0;
-      // $('#tarea').css("background", "white");
-      // $('#tarea').fadeTo('fast', 0.0);
+      setTimeout(function(){
+        $('#tarea').removeClass("highlighted");
+      }, 100);
     }
   </script>
 

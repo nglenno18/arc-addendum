@@ -44,11 +44,30 @@ socket.on('connect', function(){
           $('#linklabel').text(newlink);
 
           return console.log(document.getElementById('tarea'));
-          // $('#box2-image').attr("src", fileUID.name);
         });
       });
     });
 
+    $('#btncopy').hover(function(on){
+      console.log(on.currentTarget.childNodes[0]);
+      on.currentTarget.childNodes[0].src = "images/copy_link_blue2.png";
+    }, function(off){
+      off.currentTarget.childNodes[0].src = "images/copy_link.png";
+    });
+    $('#btncopy').on('active', function(on){
+      console.log('Active', on.currentTarget);
+      // $('#btngen').css("border", "1px #6bcee5 solid");
+      $('#tarea').css("border", "1px #6bcee5 solid");
+    });
+    $('#print').hover(function(on){
+      console.log('Active', on.currentTarget);
+      // $('#btngen').css("border", "1px #6bcee5 solid");
+      var icon = document.getElementById('topdf_icon');
+      icon.src = "images/topdf_blue.png";
+    }, function(off){
+      var icon = document.getElementById('topdf_icon');
+      icon.src = "images/topdf_grey.png";
+    });
 
     $('#fd').on('click', function(){
       var selectedBox = document.getElementById('selectedBox');
@@ -171,13 +190,21 @@ socket.on('connect', function(){
     console.log($('#btngen'));
     tempbtn = btn.innerHTML;
     // console.log(tempbtn);
-    $('#btngen').html('<span>Generate a Download Link</span> <img float="right" src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>' );
-    $('#btngen').addClass("text_align");
-    console.log($('#btngen'));
+    $('#btngen').html('<span>Generate a Download Link</span> <img float="right" src="images/generate_link_blue.png" title="upload your pdf to generate a downloadable link"/>' );
+    // $('#btngen').addClass("text_align");
+    // console.log($('#btngen'));
   },function(off){
       $('#btngen')
       .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
   });
+  $('#btngen').on('focus', function(on){
+    console.log('Focused', on.currentTarget);
+    $('#btngen').css("outline", "none");
+  });
+  // $('#btngen').on('active', function(off){
+  //   console.log('\n\nACTIVE:', off.currentTarget);
+  //   $('#btngen').css("border", "1px #6bcee5 solid");
+  // });
 
   $('#add-images').hover(function(i){
     console.log('button.hover');

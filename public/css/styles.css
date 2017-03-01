@@ -18,14 +18,11 @@ footer{
   color: #CCCCCC !important;
   text-decoration: line-through !important;
 }
-#btngen img{
-  width: 20px;
-}
 
 #tarea{
   align-self: center;
   float: right;
-  height: 24px;
+  height: 35px;
   background: #333;
   /*opacity: 0.1;*/
   color: #ccc;
@@ -33,7 +30,7 @@ footer{
   overflow-x: hidden;
   text-overflow: none;
   padding:0px;
-  padding-top: 2px;
+  padding-top: 7px;
   white-space: nowrap;
   width: inherit;
   max-width: 22em;
@@ -41,44 +38,110 @@ footer{
   box-shadow: 2px 2px 4px darkgrey;
   /*box-shadow: 5px solid darkgrey;*/
   margin-right:0px;
+  border: 1px solid black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 0px;
 }
 .highlight{
   background-color: white;
 }
 #tarea:hover{
   text-overflow: inherit;
-
 }
 #notif{
 
 }
+#print{
+  float: left;
+  /*width: 150px;*/
+  /*height: 30px;*/
+  background-color: Transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+#print:active{
+  border: 2px solid #6bcee5;
+  color: #6bcee5;
+  font-weight: bold;
+}
+#print:hover{
+  cursor: pointer;
+  color: #6bcee5;
+}
+#print:focus{
+  outline: none;
+}
+#print img{
+  float: left;
+  width: 30px;
+}
+#print span{
+  /*float: left;*/
+  position: relative;
+  top: -5px;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+
 #btncopy{
   padding:0px;
   margin: 0px;
   border-radius: 10%;
   margin-right: 30px;
-  transition: 500ms all ease;
+  /*transition: 500ms all ease;*/
   float: right;
+  background-color: Transparent;
+  /*background-color: Transparent;*/
+  border: 1px solid black;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 5px;
 }
 #btncopy img{
   padding: 0px;
   margin: 0px;
   align-self: center;
-  height: 20px;
+  height: 33px;
 }
-
 #btngen{
   display: inline-block;
   float:right;
   margin-top: 0px;
   padding-top: 0px;
-  height: 25px;
+  /*height: 25px;*/
+  background-color: Transparent;
+  border: 1px solid black;
+  border-radius: 5px;
 }
 #btngen span{
   position: relative;
-  top: -9px;
+  top: -4px;
   margin-right: 3px;
 }
+#btngen img{
+  width: 30px;
+}
+#btngen:active{
+  outline:none;
+  border: 2px solid #6bcee5;
+  color: #6bcee5;
+}
+#btncopy:active{
+  outline:none;
+  border: 2px solid #6bcee5;
+  color: #6bcee5;
+}
+
+.highlighted{
+  border: 2px solid #6bcee5!important;
+}
+
+
+
 .align_text{
   padding: 0px;
   padding-top: 0px;
