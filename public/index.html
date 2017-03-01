@@ -9,7 +9,7 @@
 <a name="top"></a>
 <body>
 <div id="page-container" class="box-shadow" onclick="clickListener()">
-    <h1>Photo Addendum     </h1><img title="Visit us at arcvendormgmt.com"float="right" id="logo" src="images/logo.png"></img>
+    <h1>Photo Addendum     </h1><img title="Visit us at arcvendormgmt.com"float="right" id="logo" src="images/ARC_logo.png"></img>
     <label id="property-label" placeholder="Property Address" contenteditable="true" placeholder="Type Property Address..."
     title="Type Name of Property">Type Property Address</label>
     <p id="instruction"><sup>Click a box, launch a file dialog, select a photo, add description</sup></p>
@@ -192,9 +192,14 @@
     }
     console.log(lastBox);
     console.log('IS EMPTY: ', isEmpty);
-    $('#bubble').addClass("hide");
+    if(!$('#bubble').hasClass("hide")){
+      $('#bubble').addClass("hide");
+    }
     $('footer').addClass("hide");
+    $('#photocount').addClass("hide");
+    $('#backtotop').addClass("hide");
     document.title = property;
+
     window.print();
     // window.title = 'ARC Addendum';
     $("#page-container").addClass("box-shadow");
@@ -203,6 +208,8 @@
     $('#'+lastContainer.id).removeAttr("id");
     instruction[0].textContent = insContent;
     $('footer').removeClass("hide");
+    $('#photocount').removeClass("hide");
+    $('#backtotop').removeClass("hide");
 
     $('#add-row').click();
     $('#delete-row').click();

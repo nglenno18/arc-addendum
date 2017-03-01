@@ -19,11 +19,20 @@ app.get('/:id', function(request, response){
   // console.log(request.params.id);
   // response.send(request.params);
   var id= request.params.id;
+
+  try{
+    id = id.replace("#top", "");
+    console.log('ID: ', id);
+  }catch(e){
+
+  }
+
   console.log(path.join(__dirname));
   var files = fs.readdirSync(__dirname);
   var adds = [];
   files.forEach((file)=>{
     // console.log(file);
+
     var str = file.substring(file.lastIndexOf('.') + 1).toUpperCase();
     // console.log(str);
     if(str === 'PNG' || str === 'JPG' || str === 'PDF'){

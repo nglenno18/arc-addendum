@@ -8,10 +8,6 @@ var t=1;
 socket.on('connect', function(){
   console.log(socket.id);
 
-  // $('#linklabel').on('click', function(evt){
-  //
-  // });
-
   var delivery = new Delivery(socket);
 
   delivery.on('delivery.connect', function(delivery){
@@ -29,18 +25,18 @@ socket.on('connect', function(){
         }
         delivery.send(files, extraParams);
         delivery.on('send.success', function(fileUID){
-          // console.log('FILEUID: ', fileUID);
-          // console.log('File was successfully sent!');
-          console.log(window.location);
+
+          // console.log(window.location);
           // var newlink = window.location + extraParams.property;
 
           var newlink = window.location + extraParams.property;
+          newlink = newlink.replace("#top", "");
           console.log(newlink);
           // $('#linklabel').removeClass("hide");
           $('#tarea').removeClass("hide");
           $('#btncopy').removeClass("hide");
           $('#tarea').text(newlink);
-          console.log(newlink);
+          // console.log(newlink);
           $('#linklabel').text(newlink);
 
           return console.log(document.getElementById('tarea'));
@@ -49,19 +45,18 @@ socket.on('connect', function(){
     });
 
     $('#btncopy').hover(function(on){
-      console.log(on.currentTarget.childNodes[0]);
+      // console.log(on.currentTarget.childNodes[0]);
       on.currentTarget.childNodes[0].src = "images/copy_link_blue2.png";
     }, function(off){
       off.currentTarget.childNodes[0].src = "images/copy_link.png";
     });
     $('#btncopy').on('active', function(on){
-      console.log('Active', on.currentTarget);
+      // console.log('Active', on.currentTarget);
       // $('#btngen').css("border", "1px #6bcee5 solid");
       $('#tarea').css("border", "1px #6bcee5 solid");
     });
     $('#print').hover(function(on){
-      console.log('Active', on.currentTarget);
-      // $('#btngen').css("border", "1px #6bcee5 solid");
+      // console.log('Active', on.currentTarget);
       var icon = document.getElementById('topdf_icon');
       icon.src = "images/topdf_blue.png";
     }, function(off){
@@ -83,7 +78,7 @@ socket.on('connect', function(){
           console.log(b.firstElementChild);
           console.log(b.firstElementChild.src);
           var sr = b.firstElementChild.src;
-          console.log(sr.substring(sr.lastIndexOf('/')));
+          // console.log(sr.substring(sr.lastIndexOf('/')));
           if(sr.substring(sr.lastIndexOf('/')) === '/temp2.png'){
             console.log('Box empty at ', b);
             return nextBox = b.id;
@@ -99,9 +94,9 @@ socket.on('connect', function(){
           $('#add-row').click();
         }
         if(nextBox === ""){
-          console.log('\n\n\nBOXES FILLED: ', filledBoxes);
+          // console.log('\n\n\nBOXES FILLED: ', filledBoxes);
           nextBox = "box" + (filledBoxes.length+1);
-          console.log('\n\n\nNEXT BOX: ', nextBox);
+          // console.log('\n\n\nNEXT BOX: ', nextBox);
         }
 
         var boxnum = nextBox.substring(nextBox.lastIndexOf('x')+1);
@@ -138,8 +133,8 @@ socket.on('connect', function(){
 
   socket.on('image', function(info){
     var correctBox = document.getElementById('selectedBox');
-    console.log('\n\n\nINFO: ', info);
-    console.log('SELECTED BOX: ', correctBox);
+    // console.log('\n\n\nINFO: ', info);
+    // console.log('SELECTED BOX: ', correctBox);
     if(correctBox) correctBox.id = info.params.box;
 
     var box = info.params.box;
@@ -149,7 +144,7 @@ socket.on('connect', function(){
     if(info.image){
       var img = new Image();
       img.src = 'data:image/jpeg;binary,'+info.buffer;
-      console.log("IMAGE received from server for box#: ", box);
+      // console.log("IMAGE received from server for box#: ", box);
 
       $('#'+box).html('<img class ="img" src="data:image/jpg;base64,' + info.buffer + '" />');
 
@@ -187,18 +182,13 @@ socket.on('connect', function(){
   var tempbtn = "";
   $('#btngen').hover(function(on){
     var btn = document.getElementById('btngen');
-    console.log($('#btngen'));
-    tempbtn = btn.innerHTML;
-    // console.log(tempbtn);
     $('#btngen').html('<span>Generate a Download Link</span> <img float="right" src="images/generate_link_blue.png" title="upload your pdf to generate a downloadable link"/>' );
-    // $('#btngen').addClass("text_align");
-    // console.log($('#btngen'));
   },function(off){
       $('#btngen')
       .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
   });
   $('#btngen').on('focus', function(on){
-    console.log('Focused', on.currentTarget);
+    // console.log('Focused', on.currentTarget);
     $('#btngen').css("outline", "none");
   });
   // $('#btngen').on('active', function(off){
@@ -209,7 +199,7 @@ socket.on('connect', function(){
   $('#add-images').hover(function(i){
     console.log('button.hover');
     var icon = document.getElementById('add-icon');
-    console.log(icon);
+    // console.log(icon);
     icon.src = "images/multi-select-blue.png";
   }, function(o){
     var icon = document.getElementById('add-icon');
@@ -218,7 +208,7 @@ socket.on('connect', function(){
   $('#add-row').hover(function(i){
     console.log('button.hover');
     var icon = document.getElementById('downarrow');
-    console.log(icon);
+    // console.log(icon);
     icon.src = "images/expandarrow-blue.png";
   }, function(o){
     var icon = document.getElementById('downarrow');
@@ -228,7 +218,7 @@ socket.on('connect', function(){
   $('#delete-row').hover(function(i){
     console.log('button.hover');
     var icon = document.getElementById('uparrow');
-    console.log(icon);
+    // console.log(icon);
     icon.src = "images/uparrow-blue.png";
   }, function(o){
     var icon = document.getElementById('uparrow');
@@ -238,7 +228,7 @@ socket.on('connect', function(){
   $('#info-icon').hover(function(i){
     console.log('button.hover');
     var icon = document.getElementById('info-icon');
-    console.log(icon);
+    // console.log(icon);
     icon.src = "images/info-blue.png";
   }, function(o){
     var icon = document.getElementById('info-icon');
@@ -275,7 +265,7 @@ socket.on('connect', function(){
     var n = document.getElementById('au'); //returns a HTML DOM Object
     // console.log(n);
     var dupNode = n.cloneNode(true);
-    console.log(dupNode);
+    // console.log(dupNode);
     var au = dupNode.children[0].children;
     console.log('\n\nAU: ', au);
 
@@ -287,24 +277,24 @@ socket.on('connect', function(){
         }
       }
     }
-    console.log('TEXT DESCs: ', textboxes);
+    // console.log('TEXT DESCs: ', textboxes);
 
     var b1 = dupNode.children[0].children[0].children[0];
     var b2 = dupNode.children[0].children[2].children[0];
     var sp1 = dupNode.children[0].children[1];
     var br1 = dupNode.children[1];
-    console.log('BREAK???: ', br1);
-    console.log('SPACE??? ', sp1);
-
-    console.log('BOX!: ', b1);
-    console.log('BOX2: ', b2);
+    // console.log('BREAK???: ', br1);
+    // console.log('SPACE??? ', sp1);
+    //
+    // console.log('BOX!: ', b1);
+    // console.log('BOX2: ', b2);
     sp1.id = sp1.id + w;
     br1.id = br1.id +w;
     dupNode.id = dupNode.id + w;
 
     b1.id = "box"+ w;
     var b1img = b1.getElementsByClassName('img')[0];
-    console.log('IMAGE: ', b1img);
+    // console.log('IMAGE: ', b1img);
     if(b1img){
       b1img.src = 'images/temp2.png';
     }
@@ -312,14 +302,14 @@ socket.on('connect', function(){
 
     b2.id = "box"+ (w+1);
     var b2img = b2.getElementsByClassName('img')[0];
-    console.log('IMAGE: ', b2img);
+    // console.log('IMAGE: ', b2img);
     if(b2img){
       b2img.src = 'images/temp2.png';
     }
 
     var doc = document.getElementById("page-container");
     doc.appendChild(dupNode);
-    console.log(dupNode);
+    // console.log(dupNode);
     if(document.getElementById('box38') || document.getElementById('box39')){
       $('#png').attr("disabled", "disabled").css("cursor", "not-allowed");
       $('#jpeg').attr("disabled", "disabled").css("cursor", "not-allowed");

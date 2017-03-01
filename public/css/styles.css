@@ -187,9 +187,11 @@ footer{
 #logo{
   margin-top: 0px;
   float: right;
-  width: 35%;
+  /*width: 35%;*/
+  height: 100px;
   position: relative;
-  top: -15px;
+  top: -50px;
+  left: -20px;
 }
 #logo:hover{
   cursor: pointer;
