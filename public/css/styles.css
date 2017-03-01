@@ -22,7 +22,7 @@ footer{
 #tarea{
   align-self: center;
   float: right;
-  height: 35px;
+  height: 34px;
   background: #333;
   /*opacity: 0.1;*/
   color: #ccc;
@@ -30,12 +30,12 @@ footer{
   overflow-x: hidden;
   text-overflow: none;
   padding:0px;
-  padding-top: 7px;
+  padding-top: 9px;
   white-space: nowrap;
   width: inherit;
   max-width: 22em;
   resize: none;
-  box-shadow: 2px 2px 4px darkgrey;
+  /*box-shadow: 2px 2px 4px darkgrey;*/
   /*box-shadow: 5px solid darkgrey;*/
   margin-right:0px;
   border: 1px solid black;
@@ -105,7 +105,7 @@ footer{
   padding: 0px;
   margin: 0px;
   align-self: center;
-  height: 33px;
+  height: 32px;
 }
 #btngen{
   display: inline-block;
@@ -134,6 +134,12 @@ footer{
   outline:none;
   border: 2px solid #6bcee5;
   color: #6bcee5;
+}
+#btncopy:hover{
+  cursor: copy;
+}
+#btngen:hover{
+  cursor: pointer;
 }
 
 .highlighted{
