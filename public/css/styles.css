@@ -59,11 +59,13 @@ footer{
   /*height: 30px;*/
   background-color: Transparent;
   border: 1px solid black;
+  box-shadow: 2px 2px 4px #888;
   border-radius: 5px;
 }
 #print:active{
-  border: 2px solid #6bcee5;
   color: #6bcee5;
+  border: 2px solid #6bcee5;
+  box-shadow: 2px 2px 4px black;
   font-weight: bold;
 }
 #print:hover{
@@ -116,6 +118,7 @@ footer{
   /*height: 25px;*/
   background-color: Transparent;
   border: 1px solid black;
+  box-shadow: 2px 2px 4px #888;
   border-radius: 5px;
 }
 #btngen span{
@@ -129,6 +132,7 @@ footer{
 #btngen:active{
   outline:none;
   border: 2px solid #6bcee5;
+  box-shadow: 2px 2px 4px black;
   color: #6bcee5;
 }
 #btncopy:active{
@@ -314,11 +318,12 @@ footer{
 #add-images img:active{
   border: none;
   box-shadow: 2px 0px 4px black;
+  border-left: 0.5px solid lightgrey;
 }
 #add-row img{
   width: 50px;
   margin-top: 20px;
-  padding-bottom: 7px;
+  padding-bottom: 6px;
   padding-top: 5px;
   border: 1px solid black;
   border-radius: 5px;
@@ -328,11 +333,13 @@ footer{
   /*width: 60px;*/
   border: none;
   box-shadow: 2px 0px 4px black;
+  border-left: 0.5px solid lightgrey;
 }
 #delete-row img:active{
   /*width: 60px;*/
   border: none;
   box-shadow: 2px 0px 4px black;
+  border-left: 0.5px solid lightgrey;
 }
 #add-row:active{
   border: 20px;
@@ -343,10 +350,10 @@ footer{
   display:none;
   width: 50px;
   margin-top: 20px;
-  padding-bottom: 7px;
-  padding-top: 4.5px;
-  border: 1px solid black;
+  padding-bottom: 6px;
+  padding-top: 5px;
   border-radius: 5px;
+  border: 1px solid black;
   box-shadow: 2px 2px 4px #888;
 }
 
