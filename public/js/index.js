@@ -14,38 +14,44 @@ socket.on('connect', function(){
     $('#pdfupload').on('click', function(evt){
       $('#pdfupload').unbind('change');
 
-      $('#pdfupload').on('change', function(evt){
-        $('#btngen').attr('disabled', 'disabled').text('Uploading File...');
-        var files = evt.currentTarget.files[0];
-        console.log(files);
-        var filename = files.name.substring(0, files.name.lastIndexOf('.'));
-        console.log(filename);
-        var newname = filename.replace(" ", "%20");
-        var extraParams = {
-          "property": newname
-        }
-        delivery.send(files, extraParams);
-        delivery.on('send.success', function(fileUID){
+      try{
+        $('#pdfupload').on('change', function(evt){
+          $('#btngen').attr('disabled', 'disabled').text('Uploading File...');
+          var files = evt.currentTarget.files[0];
+          console.log(files);
+          var filename = files.name.substring(0, files.name.lastIndexOf('.'));
+          console.log(filename);
+          var newname = filename.replace(" ", "%20");
+          var extraParams = {
+            "property": newname
+          }
+          delivery.send(files, extraParams);
+          delivery.on('send.success', function(fileUID){
 
-          // console.log(window.location);
-          // var newlink = window.location + extraParams.property;
+            // console.log(window.location);
+            // var newlink = window.location + extraParams.property;
 
-          var newlink = window.location + extraParams.property;
-          newlink = newlink.replace("#top", "");
-          console.log(newlink);
-          // $('#linklabel').removeClass("hide");
-          $('#tarea').removeClass("hide");
-          $('#btncopy').removeClass("hide");
-          $('#tarea').text(newlink);
-          $('#tarea').attr("title", newlink);
-          // console.log(newlink);
-          $('#linklabel').text(newlink);
-          $('#btngen').removeAttr('disabled').text('');
-          $('#btngen')
-          .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
-          return console.log(document.getElementById('tarea'));
+            var newlink = window.location + extraParams.property;
+            newlink = newlink.replace("#top", "");
+            console.log(newlink);
+            // $('#linklabel').removeClass("hide");
+            $('#tarea').removeClass("hide");
+            $('#btncopy').removeClass("hide");
+            $('#tarea').text(newlink);
+            $('#tarea').attr("title", newlink);
+            // console.log(newlink);
+            $('#linklabel').text(newlink);
+            $('#btngen').removeAttr('disabled').text('');
+            $('#btngen')
+            .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
+            return console.log(document.getElementById('tarea'));
+          });
         });
-      });
+      }catch(e){
+        $('#btngen').removeAttr('disabled').text('');
+        $('#btngen')
+        .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
+      }
     });
 
     $('#btncopy').hover(function(on){
