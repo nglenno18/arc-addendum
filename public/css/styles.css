@@ -290,21 +290,49 @@ footer{
   width: 720px;
   padding-bottom:50px;
 }
+
 #add-row{
-  /*display: none;*/
+  margin-left: 5px;
 }
 #add-images{
   /*display:none;*/
   float:right;
+  margin-right: 5px;
 }
 #add-images:hover{
   cursor: pointer;
 }
+#add-images img{
+  width: 50px;
+  padding-top: 5px;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-bottom: 5px;
+  box-shadow: 2px 2px 4px #888;
+}
+#add-images img:active{
+  border: none;
+  box-shadow: 2px 0px 4px black;
+}
 #add-row img{
   width: 50px;
+  margin-top: 20px;
+  padding-bottom: 7px;
+  padding-top: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #888;
 }
 #add-row img:active{
-  width: 60px;
+  /*width: 60px;*/
+  border: none;
+  box-shadow: 2px 0px 4px black;
+}
+#delete-row img:active{
+  /*width: 60px;*/
+  border: none;
+  box-shadow: 2px 0px 4px black;
 }
 #add-row:active{
   border: 20px;
@@ -314,11 +342,14 @@ footer{
 #delete-row img{
   display:none;
   width: 50px;
-  padding-left: 10px;
+  margin-top: 20px;
+  padding-bottom: 7px;
+  padding-top: 4.5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #888;
 }
-#add-row img:active{
-  width: 60px;
-}
+
 #delete-row:active{
   border: 20px;
   position:relative;
@@ -501,6 +532,10 @@ footer button{
   padding-top: 5px;
   padding-left: 5px;
 }
+/*#mid-body img{
+  border: 1px solid black;
+  border-radius: 5px;
+}*/
 #fd{
   display: none;
 }
