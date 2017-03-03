@@ -15,6 +15,7 @@ socket.on('connect', function(){
       $('#pdfupload').unbind('change');
 
       $('#pdfupload').on('change', function(evt){
+        $('#btngen').attr('disabled', 'disabled').text('Uploading File...');
         var files = evt.currentTarget.files[0];
         console.log(files);
         var filename = files.name.substring(0, files.name.lastIndexOf('.'));
@@ -36,9 +37,12 @@ socket.on('connect', function(){
           $('#tarea').removeClass("hide");
           $('#btncopy').removeClass("hide");
           $('#tarea').text(newlink);
+          $('#tarea').attr("title", newlink);
           // console.log(newlink);
           $('#linklabel').text(newlink);
-
+          $('#btngen').removeAttr('disabled').text('');
+          $('#btngen')
+          .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
           return console.log(document.getElementById('tarea'));
         });
       });

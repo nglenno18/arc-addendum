@@ -90,7 +90,7 @@ footer{
   padding:0px;
   margin: 0px;
   border-radius: 10%;
-  margin-right: 30px;
+  /*margin-right: 30px;*/
   /*transition: 500ms all ease;*/
   float: right;
   background-color: Transparent;
@@ -112,6 +112,7 @@ footer{
   float:right;
   margin-top: 0px;
   padding-top: 0px;
+  margin-left: 30px;
   /*height: 25px;*/
   background-color: Transparent;
   border: 1px solid black;
@@ -140,6 +141,7 @@ footer{
 }
 #btngen:hover{
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .highlighted{
