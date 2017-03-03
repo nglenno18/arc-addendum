@@ -15,6 +15,24 @@ var wkhtmltopdf = require('wkhtmltopdf');
 app.use(express.static(publicPath));
 
 //save instance of this html on the server!!
+app.get('/files', function(request, response){
+  var files = fs.readdirSync(__dirname);
+  var adds = [];
+  files.forEach((file)=>{
+    // console.log(file);
+    var str = file.substring(file.lastIndexOf('.') + 1).toUpperCase();
+    // console.log(str);
+    if(str === 'PNG' || str === 'JPG' || str === 'PDF'){
+      // console.log(str);
+      // console.log(file);
+      adds.push(file);
+      var filename = file.substring(0, file.lastIndexOf('.'));
+      console.log('Filename:', filename);
+      console.log('URL REQUEST ID: ', id);
+    }
+  });
+  return response.send(adds);
+});
 app.get('/:id', function(request, response){
   // console.log(request.params.id);
   // response.send(request.params);
