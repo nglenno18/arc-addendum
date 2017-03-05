@@ -7,10 +7,49 @@ var t=1;
 
 socket.on('connect', function(){
   console.log(socket.id);
+  socket.on('uploadProgress', function(percent){
+    console.log(percent);
+    $('#progress').text(percent + '%');
+  });
+
+  socket.on('successfulUpload', function(filename){
+    $('#btngen').attr('disabled', 'disabled').text('Uploading File...');
+    console.log(filename);
+    var newname = filename.replace(" ", "%20");
+    var extraParams = {
+      "property": newname
+    }
+    var newlink = window.location + extraParams.property;
+    newlink = newlink.replace("#top", "");
+    console.log(newlink);
+    // $('#linklabel').removeClass("hide");
+    $('#tarea').removeClass("hide");
+    $('#btncopy').removeClass("hide");
+    $('#tarea').text(newlink);
+    $('#tarea').attr("title", newlink);
+    // console.log(newlink);
+    $('#linklabel').text(newlink);
+    $('#btngen').removeAttr('disabled').text('');
+    $('#btngen')
+    .html('<img src="images/generate_link.png" title="upload your pdf to generate a downloadable link"/>');
+    return console.log(document.getElementById('tarea'));
+  });
 
   var delivery = new Delivery(socket);
 
   delivery.on('delivery.connect', function(delivery){
+    $('#uploadpdf').on('click', function(){
+      console.log('clicked');
+      $('#uploadpdf').unbind('change');
+      $('#uploadpdf').on('change', function(evt){
+        $('#uploadform').submit();
+        // socket.emit('uploadpdf', function(){
+        //   console.log('\n\n\nuploaded');
+        // });
+      });
+    });
+
+
     $('#pdfupload').on('click', function(evt){
       $('#pdfupload').unbind('change');
 

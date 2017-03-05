@@ -8,9 +8,14 @@ const port = process.env.PORT || 3001;
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
-var fs = require('fs');
+var fs = require('fs-extra');
 var dl = require('delivery');
 var wkhtmltopdf = require('wkhtmltopdf');
+var formidable = require('formidable');
+var util = require('util');
+
+var socketid = '';
+var percentcompleted = '';
 
 app.use(express.static(publicPath));
 
@@ -46,6 +51,8 @@ app.get('/:id', function(request, response){
   }
 
   console.log(path.join(__dirname));
+  // console.log(__dirname.substring(0, __dirname.lastIndexOf('server')));
+  // var dir = __dirname.substring(0, __dirname.lastIndexOf('server'));
   var files = fs.readdirSync(__dirname);
   var adds = [];
   files.forEach((file)=>{
@@ -57,7 +64,8 @@ app.get('/:id', function(request, response){
       // console.log(str);
       // console.log(file);
       adds.push(file);
-      var filename = file.substring(0, file.lastIndexOf('.'));
+      // var filename = file.substring(0, file.lastIndexOf('.'));
+      var filename = file.toString();
       console.log('Filename:', filename);
       console.log('URL REQUEST ID: ', id);
       if(filename === id){
@@ -73,6 +81,8 @@ app.get('/:id', function(request, response){
 
 io.on('connection', (socket)=>{
   console.log(`\n\nNew User Connected: \n\t(socket.id):${socket.id}`);
+  socketid = socket.id;
+
   var delivery = dl.listen(socket);
   delivery.on('receive.success', function(file){
     var params = file.params;
@@ -92,6 +102,71 @@ io.on('connection', (socket)=>{
     // socket.emit('image', { image: true, buffer: file.buffer.toString('base64'), params:params});
     console.log('image file is initialized');
   });
+  });
+
+  app.post('/upload', function(req, res){
+    console.log('Form SUBMITTED');
+    var form = new formidable.IncomingForm();
+    console.log(this.socketid);
+    form.parse(req, function(err, fields, files) {
+      res.end();
+    });
+
+    form.on('fileBegin', function(name, file){
+      // file.path = '../';
+      console.log(file.path);
+    })
+    form.on('progress', function(bytesReceived, bytesExpected) {
+        var percent_complete = (bytesReceived / bytesExpected) * 100;
+        // console.log(io.sockets.socket(socketid));
+        if(percent_complete.toFixed(0) != percentcompleted){
+          percentcompleted = percent_complete.toFixed(0);
+          io.to(socketid).emit('uploadProgress', percent_complete.toFixed(2));
+        }
+
+        // console.log(percent_complete.toFixed(2));
+        // socket(this.socketid).emit('uploadProgress', percent_complete.toFixed(2));
+        // socketIO.sockets.socket(this.socketid).emit('uploadProgress', percent_complete.toFixed(2));
+    });
+
+    form.on('error', function(err) {
+        console.error(err);
+    });
+
+    form.on('end', function(fields, files) {
+        /* Temporary location of our uploaded file */
+        var temp_path = this.openedFiles[0].path;
+        /* The file name of the uploaded file */
+        var file_name = this.openedFiles[0].name;
+        /* Location where we want to copy the uploaded file */
+        var new_location = 'c:/localhost/nodejs/';
+        console.log(this.openedFiles[0]);
+        var f = this.openedFiles[0];
+
+        console.log(temp_path, file_name, new_location);
+        // fs.copy(f.name, f.buffer, 'utf8', function(err){
+        //   if(err){
+        //     console.log(err);
+        //   }else {
+        //     console.log('success');
+        //   }
+        // })
+        fs.copy(temp_path, 'server/' + file_name, function(err) {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log("success!")
+                io.to(socketid).emit('uploadProgress', '100');
+                io.to(socketid).emit('successfulUpload', file_name);
+            }
+          });
+
+        console.log('\n\nSUCCESS');
+        console.log(socketid);
+        console.log(io.sockets.sockets);
+      });
+
+    return;
   });
 
   socket.on('pdf', function(params){

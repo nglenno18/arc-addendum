@@ -19,6 +19,10 @@ footer{
   text-decoration: line-through !important;
 }
 
+#uploadform{
+  display: none;
+}
+
 #tarea{
   align-self: center;
   float: right;
