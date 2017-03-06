@@ -7,24 +7,77 @@ var t=1;
 
 socket.on('connect', function(){
   console.log(socket.id);
+  function animate(u, times, interv){
+        var myVar =
+        setTimeout(function(){
+          //  alert(u);
+          console.log(u);
+          if(u <= times/2)$('#progress').fadeTo('slow', 0.0).fadeTo('slow', 1.0);
+
+           if(u==times){
+             clearTimeout(myVar);
+            //  $('#tarea').fadeTo('slow', 0.0).fadeTo('slow', 1.0);
+            $('#tarea').css("border", "2px black solid");
+            $('#btncopy').css("border", "1px black solid");
+            $('#btncopy').css("border-left", "none");
+            $('#tarea').css("border-right", "none");
+            $('#tarea').css("height", "33px");
+            $('#progress').fadeTo('slow', 0.0);
+             if(!$('#progress').hasClass("hide")){
+               $('#progress').addClass("hide");
+             }
+             return;
+           }
+          animate(u+1, times, interv);
+        },interv);
+   }
+
+   var u=1; //i is the start point 1 to 12 that is
+
   socket.on('uploadProgress', function(percent){
-    console.log(percent);
+    // console.log(percent);
     $('#progress').text(percent + '%');
+    document.title = Math.round(percent) + '% uploading';
+    if(percent === '100'){
+      if(!$('#progress').hasClass("hide")){
+        $('#progress').addClass("hide");
+      }
+      document.title = $('#property-label');
+      // var i = 0;
+      $('#progress').css("margin-right", "20px");
+      $('#progress').css("margin-top", "4px");
+      $('#progress').css("font-weight", "bold");
+      // $('#progress').css("color", "#6bcee5");
+      $('#progress').css("color", "green");
+      $('#progress').css("font-size", "150%");
+      // $('#tarea').addClass('highlighted');
+      $('#tarea').css("border", "2px #6bcee5 solid");
+      $('#tarea').css("border-right", "none");
+      $('#btncopy').css("border", "2px #6bcee5 solid");
+      $('#btncopy').css("border-left", "none");
+      // $('#progress').css("", "2px 2px grey");
+      animate(u, 6, 600)
+      //ADD THE CSS PROGRESS LABEL CLASS
+      //put the progress label INSIDE the btngen
+    }
   });
 
   socket.on('successfulUpload', function(filename){
     $('#btngen').attr('disabled', 'disabled').text('Uploading File...');
-    console.log(filename);
+    // console.log(filename);
     var newname = filename.replace(" ", "%20");
     var extraParams = {
       "property": newname
     }
     var newlink = window.location + extraParams.property;
     newlink = newlink.replace("#top", "");
-    console.log(newlink);
+    // console.log(newlink);
     // $('#linklabel').removeClass("hide");
-    $('#tarea').removeClass("hide");
-    $('#btncopy').removeClass("hide");
+
+    $('#tarea').fadeTo('slow', 0.0).removeClass("hide").fadeTo('slow', 1.0);
+    $('#btncopy').fadeTo('slow', 0.0).removeClass("hide").fadeTo('slow', 1.0);
+    $('#progress').fadeTo('slow', 0.0).removeClass("hide").fadeTo('slow', 1.0);
+
     $('#tarea').text(newlink);
     $('#tarea').attr("title", newlink);
     // console.log(newlink);
@@ -42,6 +95,9 @@ socket.on('connect', function(){
       console.log('clicked');
       $('#uploadpdf').unbind('change');
       $('#uploadpdf').on('change', function(evt){
+        if($('#progress').hasClass("hide")){
+          $('#progress').removeClass("hide");
+        }
         $('#uploadform').submit();
         // socket.emit('uploadpdf', function(){
         //   console.log('\n\n\nuploaded');

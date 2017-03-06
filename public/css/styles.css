@@ -9,6 +9,7 @@ footer{
   margin:0 auto;
   padding:0;
   font-family:"Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-bottom: 20px!important;
   width:700px;
 }
 .b{
@@ -19,14 +20,19 @@ footer{
   text-decoration: line-through !important;
 }
 
+
 #uploadform{
   display: none;
+}
+#progress{
+  margin-top: 10px;
+  float:right;
 }
 
 #tarea{
   align-self: center;
   float: right;
-  height: 34px;
+  height: 33px;
   background: #333;
   /*opacity: 0.1;*/
   color: #ccc;
@@ -124,6 +130,7 @@ footer{
   border: 1px solid black;
   box-shadow: 2px 2px 4px #888;
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 #btngen span{
   position: relative;
