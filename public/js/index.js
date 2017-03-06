@@ -42,7 +42,15 @@ socket.on('connect', function(){
       if(!$('#progress').hasClass("hide")){
         $('#progress').addClass("hide");
       }
-      document.title = $('#property-label');
+      var pr = $('#property-label').text();
+      if(pr.substring(0, 4) === "Type"){
+        document.title = 'Arc Addendum';
+      }else if(pr.substring(0, 8) === "Property"){
+        document.title = 'Arc Addendum';
+      }else{
+        document.title = pr;
+      }
+
       // var i = 0;
       $('#progress').css("margin-right", "20px");
       $('#progress').css("margin-top", "4px");
