@@ -3,8 +3,6 @@ var prevBoxid;
 var w = 1;
 var t=1;
 
-
-
 socket.on('connect', function(){
   console.log(socket.id);
   function animate(u, times, interv){
@@ -438,4 +436,67 @@ socket.on('connect', function(){
     window.scrollTo(0, 90000000000);
   });
 
+
+  // $('#printdoc').on('click', function(ev){
+  //   console.log('Print page was clicked', ev.id);
+  //   var property = $('#property-label')[0].textContent;
+  //   console.log(property);
+  //   var lastBox = "";
+  //   var lastContainer = "";
+  //   if(property == 'Type Property Address'){
+  //     var p = prompt('Enter Property Address: ', 'type address here');
+  //     console.log('PROMPT RESPONSE: ', p);
+  //     if(!p){
+  //       return p;
+  //     }else{
+  //       $('#property-label')[0].textContent = p;
+  //       $('#property-label').css("color", "#6bcee5");
+  //       property = p;
+  //     }
+  //   }
+  //
+  //   $("#page-container").removeClass("box-shadow");
+  //   $('#mid-body').addClass("hide");
+  //   var instruction = document.getElementById("instruction");
+  //   instruction = instruction.getElementsByTagName("sup");
+  //   console.log('Instructions: ', instruction);
+  //   var insContent = instruction[0].textContent;
+  //   console.log('Instructional content: ', insContent);
+  //   instruction[0].textContent = '';
+  //   lastBox = document.getElementsByClassName("box2");
+  //   var isEmpty = lastBox[lastBox.length-1].getElementsByTagName("img")[0].src;
+  //   if(isEmpty.substring(isEmpty.lastIndexOf("/")+1) === "temp2.png"){
+  //     console.log('\n\nHIDE LAST BOX');
+  //     lastBox = lastBox[lastBox.length-1].id;
+  //     console.log(document.getElementById(lastBox).parentElement);
+  //     lastContainer = document.getElementById(lastBox).parentElement;
+  //     lastContainer.id = "txtID";
+  //     $('#'+ lastContainer.id).addClass("hide");
+  //   }
+  //   console.log(lastBox);
+  //   console.log('IS EMPTY: ', isEmpty);
+  //   if(!$('#bubble').hasClass("hide")){
+  //     $('#bubble').addClass("hide");
+  //   }
+  //   $('footer').addClass("hide");
+  //   $('#photocount').addClass("hide");
+  //   $('#backtotop').addClass("hide");
+  //   document.title = property;
+  //
+  //   $("#page-container").wordExport();
+  //
+  //   // window.print();
+  //   // window.title = 'ARC Addendum';
+  //   $("#page-container").addClass("box-shadow");
+  //   $('#mid-body').removeClass("hide");
+  //   $('#'+lastContainer.id).removeClass("hide");
+  //   $('#'+lastContainer.id).removeAttr("id");
+  //   instruction[0].textContent = insContent;
+  //   $('footer').removeClass("hide");
+  //   $('#photocount').removeClass("hide");
+  //   $('#backtotop').removeClass("hide");
+  //
+  //   $('#add-row').click();
+  //   $('#delete-row').click();
+  // })
 });

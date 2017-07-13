@@ -17,6 +17,22 @@ var util = require('util');
 var socketid = '';
 var percentcompleted = '';
 
+// var phantom = require('node-phantom');
+// phantom.create(function(error,ph){
+//   if(error){
+//     console.log(error);
+//   }
+//   ph.createPage(function(err,page){
+//     page.viewportSize = {width:800,height:600};
+//     page.paperSize = {format: 'Letter', orientation: 'portrait', border: '0.5in'};
+//     page.open('http://en.wikipedia.org', function(){
+//       page.render(filename);
+//       phantom.exit();
+//     });
+//   });
+// });
+
+
 app.use(express.static(publicPath));
 
 //save instance of this html on the server!!
